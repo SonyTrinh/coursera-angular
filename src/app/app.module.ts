@@ -18,6 +18,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import "hammerjs";
 import { DishService } from "./services/dish.service";
 import { HeaderComponent } from "./header/header.component";
@@ -60,6 +61,7 @@ import { LoginComponent } from "./login/login.component";
     ReactiveFormsModule,
     MatSlideToggleModule,
     MatSelectModule,
+    MatProgressSpinnerModule
   ],
   entryComponents: [LoginComponent],
   providers: [DishService, PromotionService],
