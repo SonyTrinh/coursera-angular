@@ -1,1 +1,54 @@
-<p>home works!</p>
+<div
+  class="container"
+  fxLayout="row"
+  fxLayout.sm="column"
+  fxLayout.xs="column"
+  fxLayoutAlign="space-around center"
+  fxLayoutGap="10px"
+>
+  <mat-card *ngIf="dish" fxFlex>
+    <mat-card-header>
+      <mat-card-title>{{ dish.name | uppercase }}</mat-card-title>
+      <mat-card-subtitle>{{ dish.label }}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{ dish.image }}" />
+    <mat-card-content>
+      {{ dish.description }}
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="promotion" fxFlex>
+    <mat-card-header>
+      <mat-card-title>
+        <h3>{{ promotion.name | uppercase }}</h3>
+      </mat-card-title>
+      <mat-card-subtitle>{{ dish.label }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img
+      mat-card-image
+      src="{{ promotion.image }}"
+      alt="{{ promotion.name }}"
+    />
+    <mat-card-content>
+      <p>{{ promotion.description }}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="leader" fxFlex>
+    <mat-card-header>
+      <mat-card-title>
+        <h3>{{ leader.name | uppercase }}</h3>
+      </mat-card-title>
+      <mat-card-subtitle>{{ leader.abbr }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <img
+      mat-card-image
+      src="{{ leader.image }}"
+      alt="{{ leader.name }}"
+    />
+    <mat-card-content>
+      <p>{{ leader.description }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
