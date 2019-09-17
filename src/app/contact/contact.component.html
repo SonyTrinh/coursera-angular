@@ -38,8 +38,13 @@
   </div>
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your feedback</h3>
-    <p>{{feedbackForm.value | json}} {{feedbackForm.status | json}}</p>
-    <form novalidate [formGroup]="feedbackForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <p>{{ feedbackForm.value | json }} {{ feedbackForm.status | json }}</p>
+    <form
+      novalidate
+      [formGroup]="feedbackForm"
+      #fform="ngForm"
+      (ngSubmit)="onSubmit()"
+    >
       <p>
         <mat-form-field class="half-width">
           <input
@@ -48,7 +53,9 @@
             placeholder="First name"
             required
           />
-          <mat-error *ngIf="feedbackForm.get('firstName').hasError('required') && feedbackForm.get('firstName').touched">First name is required</mat-error>
+          <mat-error *ngIf="formErrors.firstname">{{
+            formErrors.firstname
+          }}</mat-error>
         </mat-form-field>
         <mat-form-field class="half-width">
           <input
@@ -57,7 +64,9 @@
             placeholder="Last name"
             required
           />
-           <mat-error *ngIf="feedbackForm.get('lastName').hasError('required') && feedbackForm.get('lastName').touched">Last name is required</mat-error>
+          <mat-error *ngIf="formErrors.lastname">{{
+            formErrors.lastname
+          }}</mat-error>
         </mat-form-field>
       </p>
       <p>
@@ -68,7 +77,9 @@
             placeholder="Tel"
             type="tel"
           />
-            <mat-error *ngIf="feedbackForm.get('telNum').hasError('required') && feedbackForm.get('telNum').touched">Tel. number is required</mat-error>
+          <mat-error *ngIf="formErrors.telnum">{{
+            formErrors.telnum
+          }}</mat-error>
         </mat-form-field>
         <mat-form-field class="half-width">
           <input
@@ -78,7 +89,7 @@
             type="email"
             required
           />
-            <mat-error *ngIf="feedbackForm.get('email').hasError('required') && feedbackForm.get('email').touched">Email ID is required</mat-error>
+          <mat-error *ngIf="formErrors.email">{{ formErrors.email }}</mat-error>
         </mat-form-field>
       </p>
       <table class="form-size">
@@ -94,21 +105,24 @@
             </mat-option>
           </mat-select>
         </td>
-         </table>
-        <p>
-          <mat-form-field class="full-width">
-            <textarea
-              matInput
-              formControlName="message"
-              placeholder="Your feedback"
-              rows="5"
-            ></textarea>
-          </mat-form-field>
-        </p>
-        <button mat-button class="background-primary text-floral-white" [disabled]="feedbackForm.invalid">
-          Submit
-        </button>
-     
+      </table>
+      <p>
+        <mat-form-field class="full-width">
+          <textarea
+            matInput
+            formControlName="message"
+            placeholder="Your feedback"
+            rows="5"
+          ></textarea>
+        </mat-form-field>
+      </p>
+      <button
+        mat-button
+        class="background-primary text-floral-white"
+        [disabled]="feedbackForm.invalid"
+      >
+        Submit
+      </button>
     </form>
   </div>
 </div>
