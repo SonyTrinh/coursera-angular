@@ -7,14 +7,14 @@
   fxLayoutGap="10px"
   fxLayoutGap.xs="0"
 >
-  <div fxFlex="40" *ngIf="dish">
+  <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
     <mat-card>
       <mat-card-header>
         <mat-card-title>
           <h3>{{ dish.name | uppercase }}</h3>
         </mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="{{ dish.image }}" />
+      <img mat-card-image src="{{ BaseURL + '/' + dish.image }}" />
       <mat-card-content>
         <p>{{ dish.description }}</p>
       </mat-card-content>
@@ -32,12 +32,16 @@
       </mat-card-actions>
     </mat-card>
   </div>
-  <!-- <div fxFlex [hidden]="dish">
+  <div fxFlex [hidden]="dish || errMsg">
     <mat-spinner></mat-spinner>
     <h4>Loading ...please wait</h4>
-  </div> -->
+  </div>
+  <div fxFlex *ngIf="errMsg">
+    <h4>Error</h4>
+    <p class="error">{{ errMsg }}</p>
+  </div>
   <div fxLayout="column" fxFlex="40">
-    <div *ngIf="dish">
+    <div *ngIf="dish" [@visibility]="visibility" [@expand]>
       <mat-list>
         <h3>Comments</h3>
         <mat-list-item *ngFor="let item of dish.comments">
@@ -46,13 +50,14 @@
           <p matLine>-- {{ item.author }} - {{ item.date | date: "medium" }}</p>
           <br />
         </mat-list-item>
+        <div [hidden]="commentForm.invalid">
+          <h4 matLine>{{ commentForm.value.comment }}</h4>
+          <p matLine>{{ commentForm.value.rating }} Stars</p>
+          <p matLine>-- {{ commentForm.value.author }}</p>
+        </div>
       </mat-list>
-      <div fxFlex [hidden]="dish">
-        <mat-spinner></mat-spinner>
-        <h4>Loading ...please wait</h4>
-      </div>
-    </div>    
-    <div fxLayout="column" fxFlexOffset="20px" class="form-size">
+    </div>
+    <div fxLayout="column" fxLayoutGap="10px" class="form-size" *ngIf="dish">
       <form
         novalidate
         [formGroup]="commentForm"

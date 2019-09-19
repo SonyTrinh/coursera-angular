@@ -20,6 +20,8 @@ import { FormsModule } from "@angular/forms";
 import { MatSliderModule } from "@angular/material/slider";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { HttpClientModule } from "@angular/common/http";
+
 import "hammerjs";
 import { DishService } from "./services/dish.service";
 import { HeaderComponent } from "./header/header.component";
@@ -30,8 +32,12 @@ import { HomeComponent } from "./home/home.component";
 import { AboutComponent } from "./about/about.component";
 import { ContactComponent } from "./contact/contact.component";
 import { PromotionService } from "./services/promotion.service";
+import { ProcessHTTPMsgService } from "./services/process-httpmsg.service";
 import { LoginComponent } from "./login/login.component";
 
+import { baseURL } from "./shared/baseurl";
+import { LeaderService } from "./services/leader.service";
+import { HighlightDirective } from './directives/highlight.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +48,8 @@ import { LoginComponent } from "./login/login.component";
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    HighlightDirective
   ],
   imports: [
     BrowserModule,
@@ -63,10 +70,20 @@ import { LoginComponent } from "./login/login.component";
     MatSlideToggleModule,
     MatSelectModule,
     MatProgressSpinnerModule,
-    MatSliderModule
+    MatSliderModule,
+    HttpClientModule
   ],
   entryComponents: [LoginComponent],
-  providers: [DishService, PromotionService],
+  providers: [
+    DishService,
+    PromotionService,
+    LeaderService,
+    ProcessHTTPMsgService,
+    {
+      provide: "BaseURL",
+      useValue: baseURL
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
