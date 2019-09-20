@@ -40,9 +40,15 @@ export class HomeComponent implements OnInit {
       );
     this.promoService
       .getFeaturedPromotion()
-      .subscribe(promo => (this.promotion = promo));
+      .subscribe(
+        promo => (this.promotion = promo),
+        errorMsg => (this.errorMsg = <any>errorMsg)
+      );
     this.leaderService
       .getFeatureLeader()
-      .subscribe(leaders => (this.leader = leaders));
+      .subscribe(
+        leaders => (this.leader = leaders),
+        errorMsg => (this.errorMsg = <any>errorMsg)
+      );
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Feedback, ContactType } from "../shared/feedback";
+import { FeedbackService } from "../services/feedback.service";
 
 @Component({
   selector: "app-contact",
@@ -10,6 +11,12 @@ import { Feedback, ContactType } from "../shared/feedback";
 export class ContactComponent implements OnInit {
   feedbackForm: FormGroup;
   feedback: Feedback;
+  feedbackCopy: Feedback;
+
+  errMsg: string;
+  isLoading: boolean;
+  isShowInformation: boolean;
+
   contactType = ContactType;
   @ViewChild("fform", { static: false }) feedbackFormDirective;
 
@@ -21,17 +28,17 @@ export class ContactComponent implements OnInit {
   };
 
   validationMessages = {
-    firstname: {
+    firstName: {
       required: "First Name is required.",
       minlength: "First Name must be at least 2 characters long.",
       maxlength: "FirstName cannot be more than 25 characters long."
     },
-    lastname: {
+    lastName: {
       required: "Last Name is required.",
       minlength: "Last Name must be at least 2 characters long.",
       maxlength: "Last Name cannot be more than 25 characters long."
     },
-    telnum: {
+    telNum: {
       required: "Tel. number is required.",
       pattern: "Tel. number must contain only numbers."
     },
@@ -41,7 +48,10 @@ export class ContactComponent implements OnInit {
     }
   };
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private feedBackService: FeedbackService
+  ) {
     this.createForm();
   }
 
@@ -55,12 +65,7 @@ export class ContactComponent implements OnInit {
       ],
       lastName: [
         "",
-        [
-          Validators.required,
-          Validators.required,
-          Validators.minLength(2),
-          Validators.maxLength(25)
-        ]
+        [Validators.required, Validators.minLength(2), Validators.maxLength(25)]
       ],
       telNum: [0, [Validators.required, Validators.pattern]],
       email: ["", [Validators.required, Validators.email]],
@@ -97,7 +102,27 @@ export class ContactComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isLoading = true;
     this.feedback = this.feedbackForm.value;
+    this.feedBackService.addFeedback(this.feedback).subscribe(
+      feedBack => {
+        this.feedback = feedBack;
+        this.feedbackCopy = feedBack;
+        this.isLoading = false;
+        this.isShowInformation = true;
+      },
+      errMsg => {
+        this.feedback = null;
+        this.feedbackCopy = null;
+        this.errMsg = <any>errMsg;
+      }
+    );
+
+    setTimeout(() => {
+      this.isShowInformation = false;
+    }, 5000);
+
+    this.feedbackFormDirective.resetForm();
     this.feedbackForm.reset({
       firstName: "",
       lastName: "",
@@ -107,7 +132,5 @@ export class ContactComponent implements OnInit {
       contactType: "None",
       message: ""
     });
-
-    this.feedbackFormDirective.resetForm();
   }
 }

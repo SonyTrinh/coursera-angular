@@ -18,7 +18,7 @@ import { visibility, expand } from "../animations/app.animation";
   templateUrl: "./dishdetail.component.html",
   styleUrls: ["./dishdetail.component.scss"],
 
-  animations: [visibility()]
+  animations: [visibility(),]
 })
 export class DishdetailComponent implements OnInit {
   commentForm: FormGroup;

@@ -10,7 +10,7 @@ import { ProcessHTTPMsgService } from "./process-httpmsg.service";
 })
 export class DishService {
   constructor(
-    private http: HttpClient,
+    private http: HttpClient, 
     private processHTTPMsgService: ProcessHTTPMsgService
   ) {}
 
