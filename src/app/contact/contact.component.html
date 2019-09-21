@@ -44,7 +44,7 @@
     <p matLine>Tel: {{ feedbackCopy.telNum }}</p>
     <p matLine>Email: {{ feedbackCopy.email }}</p>
     <p matLine>Contact you: {{ feedbackCopy.agree }}</p>
-    <p matLine>How: {{ feedbackCopy.contactType }}</p>
+    <p matLine>How: {{ feedbackCopy.contractType }}</p>
     <p matLine>Feedback: {{ feedbackCopy.message }}</p>
   </div>
   <div fxFlex fxFlexOffset="20px" class="form-size">
@@ -69,8 +69,8 @@
               placeholder="First name"
               required
             />
-            <mat-error *ngIf="formErrors.firstname">{{
-              formErrors.firstname
+            <mat-error *ngIf="formErrors.firstName">{{
+              formErrors.firstName
             }}</mat-error>
           </mat-form-field>
           <mat-form-field class="half-width">
@@ -80,8 +80,8 @@
               placeholder="Last name"
               required
             />
-            <mat-error *ngIf="formErrors.lastname">{{
-              formErrors.lastname
+            <mat-error *ngIf="formErrors.lastName">{{
+              formErrors.lastName
             }}</mat-error>
           </mat-form-field>
         </p>
@@ -93,8 +93,8 @@
               placeholder="Tel"
               type="tel"
             />
-            <mat-error *ngIf="formErrors.telnum">{{
-              formErrors.telnum
+            <mat-error *ngIf="formErrors.telNum">{{
+              formErrors.telNum
             }}</mat-error>
           </mat-form-field>
           <mat-form-field class="half-width">

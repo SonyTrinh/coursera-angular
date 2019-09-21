@@ -52,14 +52,14 @@ export class DishdetailComponent implements OnInit {
 
   validationMessages = {
     author: {
-      required: "First Name is required.",
-      minlength: "First Name must be at least 2 characters long.",
-      maxlength: "FirstName cannot be more than 25 characters long."
+      required: "Author is required.",
+      minlength: "Author must be at least 2 characters long.",
+      maxlength: "Author cannot be more than 25 characters long."
     },
     comment: {
-      required: "Last Name is required.",
-      minlength: "Last Name must be at least 2 characters long.",
-      maxlength: "Last Name cannot be more than 25 characters long."
+      required: "Comment is required.",
+      minlength: "Comment must be at least 2 characters long.",
+      maxlength: "Comment cannot be more than 25 characters long."
     }
   };
 
@@ -68,7 +68,7 @@ export class DishdetailComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    @Inject("BaseURL") private BaseURL
+    @Inject("BaseURL") public BaseURL
   ) {
     this.createForm();
   }
